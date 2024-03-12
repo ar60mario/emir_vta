@@ -35,8 +35,10 @@
     
     <!-- CADA ENTITIE QUE SE SUME SE TIENE QUE AGREGAR SU MAPEO -->
     
-    <!--mapping resource="ar/com/ventas/entities/Cliente.hbm.xml"/>
-    <mapping resource="ar/com/ventas/entities/ClienteTraba.hbm.xml"/>
+    <mapping resource="com/ventas/entities/CategoriaIva.hbm.xml"/>
+    <mapping resource="com/ventas/entities/Cliente.hbm.xml"/>
+    <mapping resource="com/ventas/entities/ClienteFormaPago.hbm.xml"/>
+    <!--mapping resource="ar/com/ventas/entities/ClienteTraba.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/ComprobanteCompras.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/ComprobanteComprasDetalle.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/Configuracion.hbm.xml"/>
@@ -46,8 +48,9 @@
     <mapping resource="ar/com/ventas/entities/CtaCteStock.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/CuentaCorrienteProveedor.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/CustomerTraba.hbm.xml"/-->
-    <!--mapping resource="ar/com/ventas/entities/Domicilio.hbm.xml"/>
-    <mapping resource="ar/com/ventas/entities/FcReserved.hbm.xml"/>
+    <mapping resource="com/ventas/entities/Domicilio.hbm.xml"/>
+    <mapping resource="com/ventas/entities/FormaPago.hbm.xml"/>
+    <!--mapping resource="ar/com/ventas/entities/FcReserved.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/IvaVentas.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/IvaCompras.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/HistorialPrecio.hbm.xml"/>
@@ -65,7 +68,9 @@
     <mapping resource="com/ventas/entities/Rubro.hbm.xml"/>
     <!--mapping resource="ar/com/ventas/entities/SeguimientoCompras.hbm.xml"/-->
     <mapping resource="com/ventas/entities/SubRubro.hbm.xml"/>
-    <!--mapping resource="ar/com/ventas/entities/Vendedor.hbm.xml"/-->
+    <mapping resource="com/ventas/entities/TipoDoc.hbm.xml"/>
+    <mapping resource="com/ventas/entities/Vendedor.hbm.xml"/>
+    <mapping resource="com/ventas/entities/VendedorAcumulado.hbm.xml"/>
     <mapping resource="com/ventas/entities/Usuario.hbm.xml"/>
     <!--mapping resource="ar/com/ventas/entities/PorcentualVendedor.hbm.xml"/-->
   </session-factory>

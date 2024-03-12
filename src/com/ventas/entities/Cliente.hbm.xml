@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ventas.entities.Cliente" schema="vta_emir" table="cliente">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="codigo" type="integer" column="CODIGO"/>
+        <property name="razonSocial" type="string" column="RAZON_SOCIAL"/>
+        <property name="alias" type="string" column="ALIAS"/>
+        <property name="cuit" type="string" column="CUIT"/>
+        <property name="telefono" type="string" column="TELEFONO"/>
+        <property name="celular" type="string" column="CELULAR"/>
+        <property name="mail" type="string" column="MAIL"/>
+        <property name="tieneDescuento" type="boolean" column="TIENE_DESCUENTO"/>
+        <property name="descuento" type="float" column="DESCUENTO"/>
+        <property name="observaciones" type="string" column="OBSERVACIONES"/>
+        <property name="entrega" type="string" column="ENTREGA"/>
+        <property name="activo" type="boolean" column="ACTIVO"/>
+        <many-to-one name="domicilio"
+                    class="com.ventas.entities.Domicilio"
+                     lazy="false">
+                     <column name="ID_DOMICILIO" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="vendedor"
+                    class="com.ventas.entities.Vendedor"
+                     lazy="false">
+                     <column name="ID_VENDEDOR" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="tipoDoc"
+                    class="com.ventas.entities.TipoDoc"
+                     lazy="false">
+                     <column name="ID_TIPO_DOC" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="categoriaDeIva"
+                    class="com.ventas.entities.CategoriaIva"
+                     lazy="false">
+                     <column name="ID_CATEGORIA_IVA" not-null="false"/>
+        </many-to-one>
+        <many-to-one name="formaPago"
+                    class="com.ventas.entities.FormaPago"
+                     lazy="false">
+                     <column name="ID_FORMA_PAGO" not-null="false"/>
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>

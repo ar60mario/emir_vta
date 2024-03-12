@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ventas.entities.Vendedor" schema="vta_emir" table="vendedor">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="codigo" type="integer" column="CODIGO"/>
+        <property name="nombre" type="string" column="NOMBRE"/>
+        <property name="activo" type="boolean" column="ACTIVO"/>
+        <many-to-one name="vendedorAcumulado"
+                    class="com.ventas.entities.VendedorAcumulado"
+                     lazy="false">
+                     <column name="ID_VENDEDOR_ACUMULADO" not-null="false"/>
+        </many-to-one>
+        
+    </class>
+</hibernate-mapping>
