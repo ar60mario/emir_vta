@@ -10,9 +10,14 @@ package com.ventas.util;
  * @author argia
  */
 public class Globals {
-    public static ThreadLocal<String> USR;
+    public static ThreadLocal<String> USR1;
+    public static ThreadLocal<Integer> USR2;
 
     static {
-        USR = new ThreadLocal<>();
+        USR1 = new ThreadLocal<>();
+    }
+    
+    static {
+        USR2 = new ThreadLocal<>();
     }
 }

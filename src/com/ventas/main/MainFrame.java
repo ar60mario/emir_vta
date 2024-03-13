@@ -5,17 +5,31 @@
  */
 package com.ventas.main;
 
+import com.ventas.entities.EquipoActivo;
+import com.ventas.estructura.Constante;
+import com.ventas.services.EquipoActivoService;
+import com.ventas.util.UtilFrame;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
 /**
  *
  * @author argia
  */
 public class MainFrame extends javax.swing.JFrame {
 
+    private JPanel contentPanel;
+    
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
         initComponents();
+        limpiarFrame();
     }
 
     /**
@@ -45,6 +59,11 @@ public class MainFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         salirBtn.setText("SALIR");
+        salirBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                salirBtnActionPerformed(evt);
+            }
+        });
 
         ventasBtn.setText("VENTAS");
 
@@ -136,6 +155,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_abmSubRubroMnuActionPerformed
 
+    private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
+        salir();
+    }//GEN-LAST:event_salirBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -187,4 +210,65 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JButton ventasBtn;
     private javax.swing.JMenuItem versionMnu;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarFrame() {
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
+        this.setLocationRelativeTo(null);
+        contentPanel = jPanel1;
+        JFrame jFrame = MainFrame.this;
+        jFrame.setLocationRelativeTo(null);
+        String str0 = UtilFrame.getUsuario(); // + " " + str1;
+//        int largo = str0.length();
+//        Integer order_num = Integer.valueOf(str0.substring(0, 3));
+//        String order_name = str0.substring(6, largo);
+        contentPanel.setBorder(new EmptyBorder(5, 5, 100, 5));
+        contentPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED),
+                str0, TitledBorder.LEFT, TitledBorder.BELOW_BOTTOM));
+        jFrame.setDefaultCloseOperation(0);
+        setContentPane(contentPanel);
+    }
+
+    private void salir() {
+        int escape = JOptionPane.showConfirmDialog(null, "CONFIRME SALIR DEL SISTEMA", "Atención - salir de SISTEMA", JOptionPane.YES_NO_OPTION);
+        if (escape == 0) {
+            int si = cerrarSistema();
+            if (si == 0) {
+                JOptionPane.showMessageDialog(this, "ERROR SALIENDO DEL SISTEMA");
+            }
+            System.exit(0);
+        }
+    }
+
+    private int cerrarSistema() {
+        EquipoActivo ea;
+        String str0 = UtilFrame.getUsuario(); // + " " + str1;
+        int largo = str0.length();
+        Integer order_num = Integer.valueOf(str0.substring(0, 3));
+        String order_name = str0.substring(11, largo);
+//        order_name = UtilFrame.establecerNombre();
+//        order_num = UtilFrame.establecerOrden();
+//        System.out.println(order_name);
+//        System.out.println(order_num);
+        try {
+            ea = new EquipoActivoService().getEquipoActivoByNombreAndOrden(order_name.trim(), order_num, "A");
+        } catch (Exception ex) {
+//            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+//            System.out.println("no se encontro");
+            return 0;
+        }
+        if (ea != null) {
+            ea.setActivo(false);
+        } else {
+            System.out.println("aca pasa algo");
+            System.exit(0);
+        }
+        try {
+            new EquipoActivoService().updateEquipoActivo(ea);
+            return 1;
+        } catch (Exception ex) {
+            //Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("no se actualizo");
+            return 0;
+        }
+    }
 }

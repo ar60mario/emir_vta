@@ -8,6 +8,9 @@ package com.ventas.main;
 import com.ventas.entities.Usuario;
 import com.ventas.estructura.Constante;
 import com.ventas.services.UsuarioService;
+import com.ventas.util.Globals;
+import com.ventas.util.UtilFrame;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -19,7 +22,9 @@ import javax.swing.JOptionPane;
 public class MainOneFrame extends javax.swing.JFrame {
 
     private Usuario usu = null;
-    
+    private DecimalFormat df_order = new DecimalFormat("000");
+    private DecimalFormat df_codigo = new DecimalFormat("00000");
+
     /**
      * Creates new form MainOneFrame
      */
@@ -127,9 +132,9 @@ public class MainOneFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(contrasenaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(28, 28, 28)
                 .addComponent(usuarioTxt)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ingresarBtn)
                     .addComponent(salirBtn))
@@ -230,21 +235,17 @@ public class MainOneFrame extends javax.swing.JFrame {
     private void limpiarCampos() {
         getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
         this.setLocationRelativeTo(null);
-        usuarioTxt.setText("");
+        usuarioTxt.setText(" ");
         contrasenaTxt.setText("");
         codigoTxt.setText("");
         codigoTxt.requestFocus();
     }
 
     private void ingresar() {
-        if (validarUsuario()) {
-            MainFrame mf = new MainFrame();
-            mf.setVisible(true);
-            this.dispose();
-        } else {
-            JOptionPane.showMessageDialog(this, "ERROR EN CODIGO O CONTRASEÑA");
-            limpiarCampos();
-        }
+        activarUsuario();
+        MainFrame mf = new MainFrame();
+        mf.setVisible(true);
+        this.dispose();
     }
 
     private void salir() {
@@ -261,9 +262,14 @@ public class MainOneFrame extends javax.swing.JFrame {
         } catch (Exception ex) {
             Logger.getLogger(MainOneFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-        if(usu!=null){
-        usuarioTxt.setText(usu.getNombre());
-        } else{
+        if (usu != null) {
+            if (validarUsuario()) {
+                usuarioTxt.setText(usu.getNombre());
+            } else {
+                JOptionPane.showMessageDialog(this, "ERROR EN CODIGO O CONTRASEÑA");
+                limpiarCampos();
+            }
+        } else {
             JOptionPane.showMessageDialog(this, "ERROR EN CODIGO O CONTRASEÑA");
             limpiarCampos();
         }
@@ -272,9 +278,18 @@ public class MainOneFrame extends javax.swing.JFrame {
     private boolean validarUsuario() {
         String str1 = usu.getContrasena();
         String str2 = contrasenaTxt.getText();
-        if(str1.equals(str2)){
+        if (str1.equals(str2)) {
             return true;
         }
         return false;
+    }
+
+    private void activarUsuario() {
+        String order_name = UtilFrame.establecerNombre();
+        Integer order_num = UtilFrame.establecerOrden();
+        String str1 = df_order.format(order_num) + " " + order_name + " ";
+        Integer str2 = usu.getCodigo();
+        Globals.USR1.set(str1);
+        Globals.USR2.set(str2);
     }
 }
