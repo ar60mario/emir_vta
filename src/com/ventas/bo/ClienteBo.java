@@ -156,21 +156,16 @@ public class ClienteBo {
         return listadoClientes;
     }
 
-    public List<Cliente> getUltimos(Integer orden, Integer limite) throws Exception {
-        List<Cliente> listadoClientes = null;
-        List<Cliente> listadoInverso = new ArrayList<>();
+    public Integer getUltimoCodigo() throws Exception {
+        Integer codigo = 0;
         try {
-            listadoClientes = dao.getUltimos(orden, limite);
+            Cliente cliente = dao.getUltimoCodigo();
+            codigo = cliente.getCodigo();
         } catch (HibernateException ex) {
             throw new Exception(ex);
         }
-        if (listadoClientes != null && !listadoClientes.isEmpty()) {
-            for (int a = listadoClientes.size(); a > 0; a--) {
-                Cliente cl = listadoClientes.get(a - 1);
-                listadoInverso.add(cl);
-            }
-        }
-        return listadoInverso;
+        
+        return codigo;
     }
 
     public List<Cliente> getUltimosByFiltro(String filtro, Integer orden, Integer limite) throws Exception {
@@ -188,15 +183,15 @@ public class ClienteBo {
         return listadoInverso;
     }
 
-    public Long getUltimoId() throws Exception {
-        Long id;
-        try {
-            id = dao.getUltimoId();
-        } catch (HibernateException ex) {
-            throw new Exception(ex);
-        }
-        return id;
-    }
+//    public Long getUltimoId() throws Exception {
+//        Long id;
+//        try {
+//            id = dao.getUltimoId();
+//        } catch (HibernateException ex) {
+//            throw new Exception(ex);
+//        }
+//        return id;
+//    }
 
     public List<Cliente> getClientesByFiltro(String filtro) throws Exception {
         List<Cliente> clientes = null;

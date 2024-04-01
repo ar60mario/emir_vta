@@ -48,14 +48,14 @@ public class ClienteDao extends GenericDao {
         return (List<Cliente>) criteria.list();
     }
 
-    public Long getUltimoId() {
+    public Cliente getUltimoCodigo() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(Cliente.class);
         //criteria.setFirstResult(pagina);
-        criteria.addOrder(Order.desc("id"));
+        criteria.addOrder(Order.desc("codigo"));
         criteria.setMaxResults(1);
         Cliente cli = (Cliente) criteria.uniqueResult();
-        return cli.getId();
+        return cli;
     }
 
     public List<Cliente> getUltimos(Integer orden, Integer limite) {

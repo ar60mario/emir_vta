@@ -159,19 +159,19 @@ public class ClienteService {
         return clientes;
     }
     
-    public List<Cliente> getUltimos(Integer orden, Integer limite) throws Exception{
-        List<Cliente> clientes = null;
-        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        Transaction tx = session.beginTransaction();
-        try{
-            clientes = new ClienteBo().getUltimos(orden, limite);
-            tx.commit();
-        }catch(Exception ex){
-            tx.rollback();
-            throw new Exception(ex);
-        }
-        return clientes;
-    }
+//    public List<Cliente> getUltimos(Integer orden, Integer limite) throws Exception{
+//        List<Cliente> clientes = null;
+//        Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+//        Transaction tx = session.beginTransaction();
+//        try{
+//            clientes = new ClienteBo().getUltimos(orden, limite);
+//            tx.commit();
+//        }catch(Exception ex){
+//            tx.rollback();
+//            throw new Exception(ex);
+//        }
+//        return clientes;
+//    }
     
     public List<Cliente> getUltimosByFiltro(String filtro, Integer orden, Integer limite) throws Exception{
         List<Cliente> clientes = null;
@@ -187,12 +187,12 @@ public class ClienteService {
         return clientes;
     }
     
-    public Long getUltimoId() throws Exception {
-        long id = 0L;
+    public Integer getUltimoCodigo() throws Exception {
+        Integer id = 0;
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         try{
-            id = new ClienteBo().getUltimoId();
+            id = new ClienteBo().getUltimoCodigo();
             tx.commit();
         }catch(Exception ex){
             tx.rollback();
@@ -381,4 +381,5 @@ public class ClienteService {
         }
         return clientes;
     }
+    
 }
