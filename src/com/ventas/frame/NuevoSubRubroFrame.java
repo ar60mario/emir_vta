@@ -7,8 +7,7 @@
 package com.ventas.frame;
 
 import com.ventas.entities.SubRubro;
-import com.ventas.entities.SubRubro;
-import com.ventas.services.RubroService;
+import com.ventas.estructura.Constante;
 import com.ventas.services.SubRubroService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +22,6 @@ public class NuevoSubRubroFrame extends javax.swing.JFrame {
      * Creates new form NuevoRubroFrame
      */
     public NuevoSubRubroFrame() {
-        getContentPane().setBackground(new java.awt.Color(245, 222, 179));
         initComponents();
         limpiarCampos();
         
@@ -46,6 +44,7 @@ public class NuevoSubRubroFrame extends javax.swing.JFrame {
         volverBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("NUEVO SUB RUBRO");
 
         jLabel1.setText("Codigo:");
 
@@ -116,6 +115,7 @@ public class NuevoSubRubroFrame extends javax.swing.JFrame {
         SubRubro subRubro = new SubRubro();
         subRubro.setCodigo(Integer.valueOf(codigoTxt.getText()));
         subRubro.setNombre(nombreTxt.getText());
+        subRubro.setActivo(true);
         subRubro.setLista(true);
         try {
             new SubRubroService().saveSubRubro(subRubro);
@@ -177,6 +177,7 @@ public class NuevoSubRubroFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
         nombreTxt.setText("");
         codigoTxt.setText("");
     }

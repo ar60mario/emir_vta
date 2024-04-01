@@ -22,7 +22,7 @@ import org.hibernate.criterion.Order;
  */
 public class ClienteDao extends GenericDao {
 
-    public Cliente getByCodigo(String codigo) {
+    public Cliente getByCodigo(Integer codigo) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Criteria criteria = session.createCriteria(Cliente.class);
         criteria.add(Restrictions.eq("codigo", codigo));

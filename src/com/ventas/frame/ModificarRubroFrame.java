@@ -7,6 +7,7 @@
 package com.ventas.frame;
 
 import com.ventas.entities.Rubro;
+import com.ventas.estructura.Constante;
 import com.ventas.services.RubroService;
 import javax.swing.JOptionPane;
 
@@ -25,7 +26,6 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
      * @param ru
      */
     public ModificarRubroFrame(Rubro ru) {
-        getContentPane().setBackground(new java.awt.Color(245, 222, 179));
         initComponents();
         this.rubro=ru;
         this.llenarCampos(rubro);
@@ -43,14 +43,16 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         idText = new javax.swing.JTextField();
         nombreTxt = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        guardarBtn = new javax.swing.JButton();
+        volverBtn = new javax.swing.JButton();
+        activoChk = new javax.swing.JCheckBox();
         modificarRubroMenu = new javax.swing.JMenuBar();
         archivoRubroMenu = new javax.swing.JMenu();
         guardarMenuBtn = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("MODIFICAR RUBRO");
 
         jLabel1.setText("Código");
 
@@ -60,19 +62,21 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
 
         nombreTxt.setText("Nombre");
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        guardarBtn.setText("Guardar");
+        guardarBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                guardarBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        volverBtn.setText("Volver");
+        volverBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                volverBtnActionPerformed(evt);
             }
         });
+
+        activoChk.setText("ACTIVO");
 
         archivoRubroMenu.setText("Archivo");
 
@@ -101,21 +105,24 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(24, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
                 .addGap(51, 51, 51)
-                .addComponent(jButton1)
+                .addComponent(guardarBtn)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addComponent(volverBtn)
                 .addGap(46, 46, 46))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(activoChk)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 194, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(idText, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -128,10 +135,12 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(activoChk)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(guardarBtn)
+                    .addComponent(volverBtn))
                 .addContainerGap())
         );
 
@@ -139,24 +148,24 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenu2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu2ActionPerformed
-     AbmRubroFrame arf = new AbmRubroFrame();
+     AbmRubrosFrame arf = new AbmRubrosFrame();
        arf.setVisible(true);
        this.dispose();   
     }//GEN-LAST:event_jMenu2ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-       AbmRubroFrame arf = new AbmRubroFrame();
+    private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
+       AbmRubrosFrame arf = new AbmRubrosFrame();
        arf.setVisible(true);
        this.dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_volverBtnActionPerformed
 
     private void guardarMenuBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarMenuBtnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_guardarMenuBtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void guardarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarBtnActionPerformed
         this.guardar();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_guardarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,28 +204,34 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox activoChk;
     private javax.swing.JMenu archivoRubroMenu;
+    private javax.swing.JButton guardarBtn;
     private javax.swing.JMenuItem guardarMenuBtn;
     private javax.swing.JTextField idText;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar modificarRubroMenu;
     private javax.swing.JTextField nombreTxt;
+    private javax.swing.JButton volverBtn;
     // End of variables declaration//GEN-END:variables
 
     private void guardar() {
         rubro.setNombre(nombreTxt.getText());
         rubro.setCodigo(Integer.valueOf(idText.getText()));
+        if(activoChk.isSelected()){
+            rubro.setActivo(true);
+        } else {
+            rubro.setActivo(false);
+        }
         try{
             new RubroService().updateRubro(rubro);
             JOptionPane.showMessageDialog(this, "Rubro - Guardado correctamente");
         } catch(Exception ex){
             JOptionPane.showMessageDialog(this, "Rubro - Error en salvar los rubros");
         }
-       AbmRubroFrame arf = new AbmRubroFrame();
+       AbmRubrosFrame arf = new AbmRubrosFrame();
        arf.setVisible(true);
        this.dispose();
 
@@ -225,5 +240,12 @@ public class ModificarRubroFrame extends javax.swing.JFrame {
     private void llenarCampos(Rubro rubro) {
         idText.setText(String.valueOf(rubro.getCodigo()));
         nombreTxt.setText(rubro.getNombre());
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
+        this.setLocationRelativeTo(null);
+        if(rubro.getActivo()){
+            activoChk.setSelected(true);
+        } else {
+            activoChk.setSelected(false);
+        }
     }
 }

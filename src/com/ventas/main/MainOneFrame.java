@@ -14,6 +14,7 @@ import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -24,6 +25,7 @@ public class MainOneFrame extends javax.swing.JFrame {
     private Usuario usu = null;
     private DecimalFormat df_order = new DecimalFormat("000");
     private DecimalFormat df_codigo = new DecimalFormat("00000");
+    private JPanel contentPanel;
 
     /**
      * Creates new form MainOneFrame
@@ -52,7 +54,7 @@ public class MainOneFrame extends javax.swing.JFrame {
         usuarioTxt = new javax.swing.JLabel();
         contrasenaTxt = new javax.swing.JPasswordField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("SISTEMA DE VENTAS");
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -233,7 +235,8 @@ public class MainOneFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpiarCampos() {
-        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
+        contentPanel = jPanel1;
+        contentPanel.setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
         this.setLocationRelativeTo(null);
         usuarioTxt.setText(" ");
         contrasenaTxt.setText("");

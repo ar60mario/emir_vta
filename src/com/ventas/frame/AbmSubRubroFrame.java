@@ -7,6 +7,7 @@ package com.ventas.frame;
 
 import com.ventas.entities.SubRubro;
 import com.ventas.entities.Usuario;
+import com.ventas.estructura.Constante;
 import com.ventas.main.MainFrame;
 import com.ventas.services.SubRubroService;
 import java.awt.Font;
@@ -38,7 +39,6 @@ public class AbmSubRubroFrame extends javax.swing.JFrame {
      * Creates new form AbmSubRubroFrame
      */
     public AbmSubRubroFrame() {
-        getContentPane().setBackground(new java.awt.Color(245, 222, 179));
         initComponents();
         this.llenarTabla();
     }
@@ -68,6 +68,7 @@ public class AbmSubRubroFrame extends javax.swing.JFrame {
         volverMenuBtn = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("ABM SUBRUBROS");
 
         volverBtn.setText("Volver");
         volverBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -887,6 +888,7 @@ public class AbmSubRubroFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenarTabla() {
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
         try {
             SubRubroService subRubroService = new SubRubroService();
             listaSubRubro = subRubroService.getAllSubRubros();
@@ -972,7 +974,8 @@ public class AbmSubRubroFrame extends javax.swing.JFrame {
                 new SubRubroService().updateSubRubro(sub);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "NO SE PUDO ACTUALIZAR");
-                Logger.getLogger(AbmSubRubroFrame.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+//                Logger.getLogger(AbmSubRubroFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             JOptionPane.showMessageDialog(this, "ACTUALIZADO CORRECTAMENTE");
         }
@@ -988,7 +991,8 @@ public class AbmSubRubroFrame extends javax.swing.JFrame {
                 new SubRubroService().updateSubRubro(sub);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "NO SE PUDO ACTUALIZAR");
-                Logger.getLogger(AbmSubRubroFrame.class.getName()).log(Level.SEVERE, null, ex);
+                return;
+//                Logger.getLogger(AbmSubRubroFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             JOptionPane.showMessageDialog(this, "ACTUALIZADO CORRECTAMENTE");
         }

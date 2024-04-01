@@ -7,6 +7,7 @@
 package com.ventas.frame;
 
 import com.ventas.entities.Rubro;
+import com.ventas.estructura.Constante;
 import com.ventas.services.RubroService;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,7 +23,6 @@ public class NuevoRubroFrame extends javax.swing.JFrame {
      * Creates new form NuevoRubroFrame
      */
     public NuevoRubroFrame() {
-        getContentPane().setBackground(new java.awt.Color(245, 222, 179));
         initComponents();
         limpiarCampos();
         
@@ -45,6 +45,7 @@ public class NuevoRubroFrame extends javax.swing.JFrame {
         volverBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("ALTA NUEVO RUBRO");
 
         jLabel1.setText("Codigo:");
 
@@ -115,18 +116,20 @@ public class NuevoRubroFrame extends javax.swing.JFrame {
         Rubro rubro = new Rubro();
         rubro.setCodigo(Integer.valueOf(codigoTxt.getText()));
         rubro.setNombre(nombreTxt.getText());
+        rubro.setActivo(true);
         try {
             new RubroService().saveRubro(rubro);
         } catch (Exception ex) {
-            Logger.getLogger(NuevoRubroFrame.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(NuevoRubroFrame.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(this, "Rubro - Error en guardar Rubro ");
+            return;
         }
+        JOptionPane.showMessageDialog(this, "Rubro - Guardado correctamente");
         limpiarCampos();
-        
     }//GEN-LAST:event_guardarBtnActionPerformed
 
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
-        AbmRubroFrame arf = new AbmRubroFrame();
+        AbmRubrosFrame arf = new AbmRubrosFrame();
         arf.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_volverBtnActionPerformed
@@ -179,5 +182,7 @@ public class NuevoRubroFrame extends javax.swing.JFrame {
     private void limpiarCampos() {
         nombreTxt.setText("");
         codigoTxt.setText("");
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
+        this.setLocationRelativeTo(null);
     }
 }

@@ -44,6 +44,11 @@
                      lazy="false">
                      <column name="ID_FORMA_PAGO" not-null="false"/>
         </many-to-one>
+        <many-to-one name="saldo"
+                    class="com.ventas.entities.Saldo"
+                     lazy="false">
+                     <column name="ID_SALDO" not-null="false"/>
+        </many-to-one>
         
     </class>
 </hibernate-mapping>

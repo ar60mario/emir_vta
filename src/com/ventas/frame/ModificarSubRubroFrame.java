@@ -1,12 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package com.ventas.frame;
 
 import com.ventas.entities.SubRubro;
+import com.ventas.estructura.Constante;
 import com.ventas.services.SubRubroService;
 import javax.swing.JOptionPane;
 
@@ -15,21 +10,20 @@ import javax.swing.JOptionPane;
  * @author Mario
  */
 public class ModificarSubRubroFrame extends javax.swing.JFrame {
+
     SubRubro subRubro;
+
     /**
      * Creates new form ModificarSubRubroFrame
-     */
-    
-    /**
-     * Creates new form ModificarSubRubroFrame
+     *
      * @param subRub
      */
     public ModificarSubRubroFrame(SubRubro subRub) {
-        getContentPane().setBackground(new java.awt.Color(245, 222, 179));
-        this.subRubro=subRub;
         initComponents();
+        this.subRubro = subRub;
         this.llenarCampos(subRubro);
     }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,8 +39,11 @@ public class ModificarSubRubroFrame extends javax.swing.JFrame {
         nombreTxt = new javax.swing.JTextField();
         guardarbtn = new javax.swing.JButton();
         volverBtn = new javax.swing.JButton();
+        activoChk = new javax.swing.JCheckBox();
+        enListaChk = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("MODIFICAR SUB-RUBRO");
 
         jLabel1.setText("Código");
 
@@ -70,6 +67,10 @@ public class ModificarSubRubroFrame extends javax.swing.JFrame {
             }
         });
 
+        activoChk.setText("ACTIVO");
+
+        enListaChk.setText("EN LISTA");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -91,7 +92,12 @@ public class ModificarSubRubroFrame extends javax.swing.JFrame {
                         .addComponent(guardarbtn)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(volverBtn)
-                        .addGap(72, 72, 72))))
+                        .addGap(72, 72, 72))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(enListaChk)
+                            .addComponent(activoChk))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -100,15 +106,19 @@ public class ModificarSubRubroFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(codigoTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(24, 24, 24)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(nombreTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
+                .addComponent(activoChk)
+                .addGap(18, 18, 18)
+                .addComponent(enListaChk)
+                .addGap(47, 47, 47)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(guardarbtn)
                     .addComponent(volverBtn))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -119,9 +129,8 @@ public class ModificarSubRubroFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_guardarbtnActionPerformed
 
     private void volverBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverBtnActionPerformed
-        this.dispose();
-        AbmSubRubroFrame asf = new AbmSubRubroFrame();
-        asf.setVisible(true);
+        volver();
+
     }//GEN-LAST:event_volverBtnActionPerformed
 
     /**
@@ -161,7 +170,9 @@ public class ModificarSubRubroFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox activoChk;
     private javax.swing.JTextField codigoTxt;
+    private javax.swing.JCheckBox enListaChk;
     private javax.swing.JButton guardarbtn;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -170,21 +181,35 @@ public class ModificarSubRubroFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void llenarCampos(SubRubro subRubro) {
-        codigoTxt.setText(String.valueOf(subRubro.getCodigo()));
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
+        codigoTxt.setText(subRubro.getCodigo().toString());
         nombreTxt.setText(subRubro.getNombre());
+        if (subRubro.getActivo()) {
+            activoChk.setSelected(true);
+        } else {
+            activoChk.setSelected(false);
+        }
+        if (subRubro.getLista()) {
+            enListaChk.setSelected(true);
+        } else {
+            enListaChk.setSelected(false);
+        }
     }
 
     private void guardar() {
         subRubro.setCodigo(Integer.valueOf(codigoTxt.getText()));
         subRubro.setNombre(nombreTxt.getText());
-        try{
+        try {
             new SubRubroService().updateSubRubro(subRubro);
-            JOptionPane.showMessageDialog(this, "SubRubro - SubRubro guardado correctamente");
-                
+            JOptionPane.showMessageDialog(this, "SubRubro guardado correctamente");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Error al guardar SUBRUBRO");
+            return;
         }
-        catch(Exception ex){
-            JOptionPane.showMessageDialog(this, "Subrubro -  Error al guardar el cliente");
-        }
+        volver();
+    }
+
+    private void volver() {
         AbmSubRubroFrame asf = new AbmSubRubroFrame();
         asf.setVisible(true);
         this.dispose();

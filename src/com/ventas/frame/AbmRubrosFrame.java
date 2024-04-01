@@ -2,6 +2,7 @@ package com.ventas.frame;
 
 import com.ventas.entities.Rubro;
 import com.ventas.entities.Usuario;
+import com.ventas.estructura.Constante;
 import com.ventas.main.MainFrame;
 import com.ventas.services.RubroService;
 //import com.ventas.services.UsuarioService;
@@ -31,16 +32,17 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Administrador
  */
-public class AbmRubroFrame extends javax.swing.JFrame {
+public class AbmRubrosFrame extends javax.swing.JFrame {
 
     List<Rubro> listadoRubro = new ArrayList<Rubro>();
 
     /**
      * Creates new form AbmRubroFrame
      */
-    public AbmRubroFrame() {
-        getContentPane().setBackground(new java.awt.Color(245, 222, 179));
+    public AbmRubrosFrame() {
         initComponents();
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
+        this.setLocationRelativeTo(null);
         this.llenartabla();
     }
 
@@ -70,6 +72,7 @@ public class AbmRubroFrame extends javax.swing.JFrame {
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("ABM RUBROS");
 
         rubroTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -814,21 +817,23 @@ public class AbmRubroFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AbmRubroFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmRubrosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AbmRubroFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmRubrosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AbmRubroFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmRubrosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AbmRubroFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AbmRubrosFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AbmRubroFrame().setVisible(true);
+                new AbmRubrosFrame().setVisible(true);
             }
         });
     }

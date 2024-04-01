@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ventas.entities.Saldo" schema="vta_emir" table="saldo">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="saldo" type="double" column="SALDO"/>
+        <property name="fecha" type="date" column="FECHA"/>
+        <property name="saldo2" type="double" column="SALDO_2"/>
+        
+    </class>
+</hibernate-mapping>

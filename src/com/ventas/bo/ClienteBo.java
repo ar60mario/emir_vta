@@ -124,7 +124,7 @@ public class ClienteBo {
         }
     }
 
-    public Cliente getClienteByCodigo(String codigo) throws Exception {
+    public Cliente getClienteByCodigo(Integer codigo) throws Exception {
         Cliente cliente = null;
         try {
             cliente = dao.getByCodigo(codigo);

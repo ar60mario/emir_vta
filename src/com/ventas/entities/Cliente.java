@@ -12,7 +12,7 @@ package com.ventas.entities;
 public class Cliente {
 
     private Long id;
-    private String codigo;
+    private Integer codigo;
     private String razonSocial;
     private String alias;
     private String cuit;
@@ -28,12 +28,16 @@ public class Cliente {
     private Domicilio domicilio;
     private TipoDoc tipoDoc;
     private CategoriaIva categoriaDeIva;
-    private ClienteFormaPago formaPago;
+    private FormaPago formaPago;
+    private Saldo saldo;
 
     public Cliente() {
     }
 
-    public Cliente(Long id, String codigo, String razonSocial, String alias, String cuit, String telefono, String celular, String mail, Boolean tieneDescuento, Float descuento, String observaciones, String entrega, Boolean activo, Vendedor vendedor, Domicilio domicilio, TipoDoc tipoDoc, CategoriaIva categoriaDeIva, ClienteFormaPago formaPago) {
+    public Cliente(Long id, Integer codigo, String razonSocial, String alias, String cuit, String telefono, 
+            String celular, String mail, Boolean tieneDescuento, Float descuento, String observaciones, 
+            String entrega, Boolean activo, Vendedor vendedor, Domicilio domicilio, TipoDoc tipoDoc, 
+            CategoriaIva categoriaDeIva, FormaPago formaPago, Saldo saldo) {
         this.id = id;
         this.codigo = codigo;
         this.razonSocial = razonSocial;
@@ -52,6 +56,7 @@ public class Cliente {
         this.tipoDoc = tipoDoc;
         this.categoriaDeIva = categoriaDeIva;
         this.formaPago = formaPago;
+        this.saldo = saldo;
     }
 
     public Long getId() {
@@ -62,11 +67,11 @@ public class Cliente {
         this.id = id;
     }
 
-    public String getCodigo() {
+    public Integer getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(Integer codigo) {
         this.codigo = codigo;
     }
 
@@ -190,12 +195,20 @@ public class Cliente {
         this.categoriaDeIva = categoriaDeIva;
     }
 
-    public ClienteFormaPago getFormaPago() {
+    public FormaPago getFormaPago() {
         return formaPago;
     }
 
-    public void setFormaPago(ClienteFormaPago formaPago) {
+    public void setFormaPago(FormaPago formaPago) {
         this.formaPago = formaPago;
+    }
+
+    public Saldo getSaldo() {
+        return saldo;
+    }
+
+    public void setSaldo(Saldo saldo) {
+        this.saldo = saldo;
     }
 
 }

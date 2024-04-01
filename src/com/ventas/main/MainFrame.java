@@ -7,6 +7,9 @@ package com.ventas.main;
 
 import com.ventas.entities.EquipoActivo;
 import com.ventas.estructura.Constante;
+import com.ventas.frame.AbmClientesFrame;
+import com.ventas.frame.AbmRubrosFrame;
+import com.ventas.frame.AbmSubRubroFrame;
 import com.ventas.services.EquipoActivoService;
 import com.ventas.util.UtilFrame;
 import javax.swing.JFrame;
@@ -48,15 +51,17 @@ public class MainFrame extends javax.swing.JFrame {
         cobranzaBtn = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        abmClientesMnu = new javax.swing.JMenuItem();
+        abmProductosMnu = new javax.swing.JMenuItem();
         abmRubroMnu = new javax.swing.JMenuItem();
         abmSubRubroMnu = new javax.swing.JMenuItem();
-        jMenuItem1 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         versionMnu = new javax.swing.JMenuItem();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setTitle("MENU PRINCIPAL");
 
         salirBtn.setText("SALIR");
         salirBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -100,7 +105,28 @@ public class MainFrame extends javax.swing.JFrame {
 
         jMenu1.setText("ARCHIVO");
 
+        abmClientesMnu.setText("ABM CLIENTES");
+        abmClientesMnu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abmClientesMnuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(abmClientesMnu);
+
+        abmProductosMnu.setText("ABM PRODUCTOS");
+        abmProductosMnu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abmProductosMnuActionPerformed(evt);
+            }
+        });
+        jMenu1.add(abmProductosMnu);
+
         abmRubroMnu.setText("ABM RUBRO");
+        abmRubroMnu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                abmRubroMnuActionPerformed(evt);
+            }
+        });
         jMenu1.add(abmRubroMnu);
 
         abmSubRubroMnu.setText("ABM SUBRURBRO");
@@ -110,9 +136,6 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         jMenu1.add(abmSubRubroMnu);
-
-        jMenuItem1.setText("ABM CLIENTES");
-        jMenu1.add(jMenuItem1);
 
         jMenuBar1.add(jMenu1);
 
@@ -152,12 +175,25 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void abmSubRubroMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abmSubRubroMnuActionPerformed
-        // TODO add your handling code here:
+        abmSubRubro();
     }//GEN-LAST:event_abmSubRubroMnuActionPerformed
 
     private void salirBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirBtnActionPerformed
         salir();
     }//GEN-LAST:event_salirBtnActionPerformed
+
+    private void abmRubroMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abmRubroMnuActionPerformed
+        abmRubros();
+    }//GEN-LAST:event_abmRubroMnuActionPerformed
+
+    private void abmClientesMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abmClientesMnuActionPerformed
+        abmClientes();
+        
+    }//GEN-LAST:event_abmClientesMnuActionPerformed
+
+    private void abmProductosMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abmProductosMnuActionPerformed
+        abmProductos();
+    }//GEN-LAST:event_abmProductosMnuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,6 +231,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem abmClientesMnu;
+    private javax.swing.JMenuItem abmProductosMnu;
     private javax.swing.JMenuItem abmRubroMnu;
     private javax.swing.JMenuItem abmSubRubroMnu;
     private javax.swing.JButton cobranzaBtn;
@@ -204,7 +242,6 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JButton salirBtn;
     private javax.swing.JButton ventasBtn;
@@ -212,9 +249,9 @@ public class MainFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void limpiarFrame() {
-        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
-        this.setLocationRelativeTo(null);
+//        this.setLocationRelativeTo(null);
         contentPanel = jPanel1;
+        contentPanel.setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
         JFrame jFrame = MainFrame.this;
         jFrame.setLocationRelativeTo(null);
         String str0 = UtilFrame.getUsuario(); // + " " + str1;
@@ -270,5 +307,27 @@ public class MainFrame extends javax.swing.JFrame {
             System.out.println("no se actualizo");
             return 0;
         }
+    }
+
+    private void abmRubros() {
+        AbmRubrosFrame arf = new AbmRubrosFrame();
+        arf.setVisible(true);
+        this.dispose();
+    }
+
+    private void abmClientes() {
+        AbmClientesFrame acf = new AbmClientesFrame();
+        acf.setVisible(true);
+        this.dispose();
+    }
+
+    private void abmProductos() {
+        
+    }
+
+    private void abmSubRubro() {
+        AbmSubRubroFrame asrf = new AbmSubRubroFrame();
+        asrf.setVisible(true);
+        this.dispose();
     }
 }

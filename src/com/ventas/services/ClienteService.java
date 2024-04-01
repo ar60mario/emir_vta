@@ -10,7 +10,7 @@ import org.hibernate.Transaction;
 
 public class ClienteService {
     
-    public Cliente getClienteByCodigo(String codigo) throws Exception{
+    public Cliente getClienteByCodigo(Integer codigo) throws Exception{
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
         Transaction tx = session.beginTransaction();
         Cliente cliente = null;

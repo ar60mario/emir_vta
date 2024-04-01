@@ -67,6 +67,7 @@
     <mapping resource="ar/com/ventas/entities/RenglonFactura.hbm.xml"/>
     <mapping resource="ar/com/ventas/entities/RenglonFcReserved.hbm.xml"/-->
     <mapping resource="com/ventas/entities/Rubro.hbm.xml"/>
+    <mapping resource="com/ventas/entities/Saldo.hbm.xml"/>
     <!--mapping resource="ar/com/ventas/entities/SeguimientoCompras.hbm.xml"/-->
     <mapping resource="com/ventas/entities/SubRubro.hbm.xml"/>
     <mapping resource="com/ventas/entities/TipoDoc.hbm.xml"/>

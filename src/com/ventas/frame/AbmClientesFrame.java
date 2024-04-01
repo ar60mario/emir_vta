@@ -5,17 +5,34 @@
  */
 package com.ventas.frame;
 
+import com.ventas.entities.Cliente;
+import com.ventas.entities.Saldo;
+import com.ventas.estructura.Constante;
+import com.ventas.services.ClienteService;
+import com.ventas.util.UtilFrame;
+import java.text.DecimalFormat;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author argia
  */
 public class AbmClientesFrame extends javax.swing.JFrame {
 
+    private List<Cliente> clientes;
+    private DecimalFormat df = new DecimalFormat("#0.00");
+
     /**
      * Creates new form AbmClientesFrame
      */
     public AbmClientesFrame() {
         initComponents();
+        limpiarCampos();
+        cargarLista();
+        llenarTabla();
     }
 
     /**
@@ -27,21 +44,169 @@ public class AbmClientesFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        filtroTxt = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla = new javax.swing.JTable();
+        nuevoBtn = new javax.swing.JButton();
+        primeroBtn = new javax.swing.JButton();
+        modificarBtn = new javax.swing.JButton();
+        anteriorBtn = new javax.swing.JButton();
+        siguienteBtn = new javax.swing.JButton();
+        volverBtn = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("NOMBRE:");
+
+        filtroTxt.setText("NOMBRE");
+        filtroTxt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                filtroTxtKeyPressed(evt);
+            }
+        });
+
+        tabla.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CODIGO", "NOMBRE", "CUIT", "SALDO"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tabla);
+        if (tabla.getColumnModel().getColumnCount() > 0) {
+            tabla.getColumnModel().getColumn(0).setPreferredWidth(20);
+            tabla.getColumnModel().getColumn(1).setPreferredWidth(200);
+            tabla.getColumnModel().getColumn(2).setPreferredWidth(100);
+            tabla.getColumnModel().getColumn(3).setPreferredWidth(30);
+        }
+
+        nuevoBtn.setText("NUEVO");
+        nuevoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoBtnActionPerformed(evt);
+            }
+        });
+
+        primeroBtn.setText("PRIMERO");
+        primeroBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                primeroBtnActionPerformed(evt);
+            }
+        });
+
+        modificarBtn.setText("MODIFICAR");
+        modificarBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarBtnActionPerformed(evt);
+            }
+        });
+
+        anteriorBtn.setText("ANTERIOR");
+        anteriorBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                anteriorBtnActionPerformed(evt);
+            }
+        });
+
+        siguienteBtn.setText("SIGUIENTE");
+        siguienteBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                siguienteBtnActionPerformed(evt);
+            }
+        });
+
+        volverBtn.setText("VOLVER");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 786, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(filtroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(primeroBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(anteriorBtn)
+                                .addGap(18, 18, 18)
+                                .addComponent(siguienteBtn)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(nuevoBtn)
+                        .addGap(18, 18, 18)
+                        .addComponent(modificarBtn)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(volverBtn)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 537, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(filtroTxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 412, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(primeroBtn)
+                    .addComponent(anteriorBtn)
+                    .addComponent(siguienteBtn))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nuevoBtn)
+                    .addComponent(modificarBtn)
+                    .addComponent(volverBtn))
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void filtroTxtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_filtroTxtKeyPressed
+        if (evt.getKeyCode() == 10) {
+            cargarLista();
+            llenarTabla();
+        }
+    }//GEN-LAST:event_filtroTxtKeyPressed
+
+    private void primeroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_primeroBtnActionPerformed
+        primero();
+    }//GEN-LAST:event_primeroBtnActionPerformed
+
+    private void anteriorBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_anteriorBtnActionPerformed
+        anterior();
+    }//GEN-LAST:event_anteriorBtnActionPerformed
+
+    private void siguienteBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_siguienteBtnActionPerformed
+        siguiente();
+    }//GEN-LAST:event_siguienteBtnActionPerformed
+
+    private void nuevoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBtnActionPerformed
+        nuevo();
+    }//GEN-LAST:event_nuevoBtnActionPerformed
+
+    private void modificarBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarBtnActionPerformed
+        modificar();
+    }//GEN-LAST:event_modificarBtnActionPerformed
 
     /**
      * @param args the command line arguments
@@ -79,5 +244,75 @@ public class AbmClientesFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton anteriorBtn;
+    private javax.swing.JTextField filtroTxt;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton modificarBtn;
+    private javax.swing.JButton nuevoBtn;
+    private javax.swing.JButton primeroBtn;
+    private javax.swing.JButton siguienteBtn;
+    private javax.swing.JTable tabla;
+    private javax.swing.JButton volverBtn;
     // End of variables declaration//GEN-END:variables
+
+    private void limpiarCampos() {
+        getContentPane().setBackground(new java.awt.Color(Constante.getR(), Constante.getG(), Constante.getB()));
+        filtroTxt.setText("");
+    }
+
+    private void cargarLista() {
+        clientes = null;
+        if (filtroTxt.getText().isEmpty()) {
+            String filtro = filtroTxt.getText();
+            try {
+                clientes = new ClienteService().getClientesByFiltro(filtro);
+            } catch (Exception ex) {
+                Logger.getLogger(AbmClientesFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            try {
+                clientes = new ClienteService().getAllClientesActivos();
+            } catch (Exception ex) {
+                Logger.getLogger(AbmClientesFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
+
+    private void llenarTabla() {
+        UtilFrame.limpiarTabla(tabla);
+        if (clientes != null && !clientes.isEmpty()) {
+            DefaultTableModel tbl = (DefaultTableModel) tabla.getModel();
+            for (Cliente c : clientes) {
+                Object o[] = new Object[4];
+                o[0] = c.getCodigo();
+                o[1] = c.getRazonSocial();
+                o[2] = c.getCuit();
+                Saldo saldo = c.getSaldo();
+                o[3] = df.format(saldo.getSaldo());
+                tbl.addRow(o);
+            }
+            tabla.setModel(tbl);
+        }
+    }
+
+    private void modificar() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void nuevo() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void siguiente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void anterior() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void primero() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
