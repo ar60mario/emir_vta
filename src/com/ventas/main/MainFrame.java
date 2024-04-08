@@ -8,6 +8,7 @@ package com.ventas.main;
 import com.ventas.entities.EquipoActivo;
 import com.ventas.estructura.Constante;
 import com.ventas.frame.AbmClientesFrame;
+import com.ventas.frame.AbmProductosFrame;
 import com.ventas.frame.AbmRubrosFrame;
 import com.ventas.frame.AbmSubRubroFrame;
 import com.ventas.services.EquipoActivoService;
@@ -148,6 +149,11 @@ public class MainFrame extends javax.swing.JFrame {
         jMenu4.setText("?");
 
         versionMnu.setText("VERSION");
+        versionMnu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                versionMnuActionPerformed(evt);
+            }
+        });
         jMenu4.add(versionMnu);
 
         jMenuBar1.add(jMenu4);
@@ -194,6 +200,10 @@ public class MainFrame extends javax.swing.JFrame {
     private void abmProductosMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abmProductosMnuActionPerformed
         abmProductos();
     }//GEN-LAST:event_abmProductosMnuActionPerformed
+
+    private void versionMnuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versionMnuActionPerformed
+        mostrarVersion();
+    }//GEN-LAST:event_versionMnuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -322,12 +332,20 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void abmProductos() {
-        
+        AbmProductosFrame apf = new AbmProductosFrame();
+        apf.setVisible(true);
+        this.dispose();
     }
 
     private void abmSubRubro() {
         AbmSubRubroFrame asrf = new AbmSubRubroFrame();
         asrf.setVisible(true);
+        this.dispose();
+    }
+
+    private void mostrarVersion() {
+        VersionFrame vf = new VersionFrame();
+        vf.setVisible(true);
         this.dispose();
     }
 }
