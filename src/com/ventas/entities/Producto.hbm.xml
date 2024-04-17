@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.ventas.entities.Producto" schema="vta_emir" table="producto">
+        <id name="id" column="ID">
+            <generator class="identity"/>
+        </id>
+        <property name="codigo" type="integer" column="CODIGO"/>
+        <property name="detalle" type="string" column="DETALLE"/>
+        <property name="activo" type="boolean" column="ACTIVO"/>
+        <one-to-one name="precio"
+                    class="com.ventas.entities.ProductoPrecio"
+                     lazy="false">
+                     <column name="ID_PRECIO" not-null="true"/>
+        </one-to-one>
+        <many-to-one name="codigoBarras"
+                    class="com.ventas.entities.ProductoCodigoBarras"
+                     lazy="false">
+                     <column name="ID_CODIGO_BARRAS" not-null="false"/>
+        </many-to-one>
+        <one-to-one name="stock"
+                    class="com.ventas.entities.ProductoStock"
+                     lazy="false">
+                     <column name="ID_STOCK" not-null="true"/>
+        </one-to-one>
+        
+    </class>
+</hibernate-mapping>

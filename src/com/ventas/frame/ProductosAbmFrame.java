@@ -6,6 +6,9 @@
 package com.ventas.frame;
 
 import com.ventas.entities.Producto;
+import com.ventas.main.MainFrame;
+import com.ventas.services.ProductoService;
+import com.ventas.util.UtilFrame;
 import java.text.DecimalFormat;
 import java.util.List;
 import java.util.logging.Level;
@@ -17,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Mario
  */
-public class ProductosModificarFrame extends javax.swing.JFrame {
+public class ProductosAbmFrame extends javax.swing.JFrame {
 
     private List<Producto> productos;
     private DecimalFormat df = new DecimalFormat("#0.00");
@@ -25,7 +28,7 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
     /**
      * Creates new form ProductosModificarFrame
      */
-    public ProductosModificarFrame() {
+    public ProductosAbmFrame() {
         initComponents();
         getContentPane().setBackground(new java.awt.Color(100, 100, 255));
         this.setLocationRelativeTo(null);
@@ -53,6 +56,7 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
         eliminarBtn = new javax.swing.JButton();
         volverBtn = new javax.swing.JButton();
         eliminadosBtn = new javax.swing.JButton();
+        nuevoBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setTitle("MODIFICAR PRODUCTOS");
@@ -126,6 +130,13 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
             }
         });
 
+        nuevoBtn.setText("NUEVO");
+        nuevoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nuevoBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -144,6 +155,8 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
                         .addComponent(codigoAlTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(nuevoBtn)
+                        .addGap(18, 18, 18)
                         .addComponent(modificarBtn)
                         .addGap(18, 18, 18)
                         .addComponent(eliminarBtn)
@@ -169,7 +182,8 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
                     .addComponent(modificarBtn)
                     .addComponent(eliminarBtn)
                     .addComponent(volverBtn)
-                    .addComponent(eliminadosBtn))
+                    .addComponent(eliminadosBtn)
+                    .addComponent(nuevoBtn))
                 .addContainerGap())
         );
 
@@ -208,6 +222,10 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
         volver();
     }//GEN-LAST:event_volverBtnActionPerformed
 
+    private void nuevoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nuevoBtnActionPerformed
+        nuevo();
+    }//GEN-LAST:event_nuevoBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -225,21 +243,23 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductosModificarFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAbmFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductosModificarFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAbmFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductosModificarFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAbmFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductosModificarFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ProductosAbmFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ProductosModificarFrame().setVisible(true);
+                new ProductosAbmFrame().setVisible(true);
             }
         });
     }
@@ -253,6 +273,7 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton modificarBtn;
+    private javax.swing.JButton nuevoBtn;
     private javax.swing.JTable tabla;
     private javax.swing.JButton volverBtn;
     // End of variables declaration//GEN-END:variables
@@ -307,7 +328,7 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
         try {
             productos = new ProductoService().getAllProductosByCodigos(cod1, cod2);
         } catch (Exception ex) {
-            Logger.getLogger(ProductosModificarFrame.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductosAbmFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         if (productos != null && !productos.isEmpty()) {
 //            UtilTabla1 ut = new UtilTabla1();
@@ -318,23 +339,23 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
                 Object o[] = new Object[8];
                 o[0] = p.getCodigo();
                 o[1] = p.getDetalle();
-                if (p.getCosto() != null) {
-                    o[2] = df.format(p.getCosto());
+                if (p.getPrecio().getPrecioCosto() != null) {
+                    o[2] = df.format(p.getPrecio().getPrecioCosto());
                 } else {
                     o[2] = df.format(0.00);
                 }
-                if (p.getLista1() != null) {
-                    o[3] = df.format(p.getLista1());
+                if (p.getPrecio().getPrecioLista1() != null) {
+                    o[3] = df.format(p.getPrecio().getPrecioLista1());
                 } else {
                     o[3] = df.format(0.00);
                 }
-                if (p.getLista2() != null) {
-                    o[4] = df.format(p.getLista2());
+                if (p.getPrecio().getPrecioLista2() != null) {
+                    o[4] = df.format(p.getPrecio().getPrecioLista2());
                 } else {
                     o[4] = df.format(0.00);
                 }
-                if (p.getLista3() != null) {
-                    o[5] = df.format(p.getLista3());
+                if (p.getPrecio().getPrecioLista3() != null) {
+                    o[5] = df.format(p.getPrecio().getPrecioLista3());
                 } else {
                     o[5] = df.format(0.00);
                 }
@@ -343,8 +364,8 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
                 } else {
                     o[6] = df.format(0.00);
                 }
-                if (p.getImpuesto() != null) {
-                    o[7] = df.format(p.getImpuesto());
+                if (p.getPrecio().getImpuesto()!= null) {
+                    o[7] = df.format(p.getPrecio().getImpuesto());
                 } else {
                     o[7] = df.format(0.00);
                 }
@@ -355,10 +376,14 @@ public class ProductosModificarFrame extends javax.swing.JFrame {
     }
 
     private void limpiarCampos() {
-        UtilTabla1 ut = new UtilTabla1();
-        tabla.setDefaultRenderer(Object.class, ut);
+//        UtilTabla1 ut = new UtilTabla1();
+//        tabla.setDefaultRenderer(Object.class, ut);
         UtilFrame.limpiarTabla(tabla);
         codigoDeTxt.setText("");
         codigoAlTxt.setText("");
+    }
+
+    private void nuevo() {
+        
     }
 }

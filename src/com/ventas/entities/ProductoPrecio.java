@@ -18,12 +18,15 @@ public class ProductoPrecio {
     private Double precioLista1;
     private Double precioLista2;
     private Double precioLista3;
+    private Double impuesto;
     private Producto producto;
 
     public ProductoPrecio() {
     }
 
-    public ProductoPrecio(Long id, Integer unidadesPorCaja, Integer unidadesPorBulto, Integer unidadesPorPallet, Double precioCosto, Double precioLista1, Double precioLista2, Double precioLista3, Producto producto) {
+    public ProductoPrecio(Long id, Integer unidadesPorCaja, Integer unidadesPorBulto, Integer unidadesPorPallet, 
+            Double precioCosto, Double precioLista1, Double precioLista2, Double precioLista3, Double impuesto, 
+            Producto producto) {
         this.id = id;
         this.unidadesPorCaja = unidadesPorCaja;
         this.unidadesPorBulto = unidadesPorBulto;
@@ -32,7 +35,8 @@ public class ProductoPrecio {
         this.precioLista1 = precioLista1;
         this.precioLista2 = precioLista2;
         this.precioLista3 = precioLista3;
-        this.producto = producto;
+        this.precioLista3 = precioLista3;
+        this.impuesto = impuesto;
     }
 
     public Long getId() {
@@ -97,6 +101,14 @@ public class ProductoPrecio {
 
     public void setPrecioLista3(Double precioLista3) {
         this.precioLista3 = precioLista3;
+    }
+
+    public Double getImpuesto() {
+        return impuesto;
+    }
+
+    public void setImpuesto(Double impuesto) {
+        this.impuesto = impuesto;
     }
 
     public Producto getProducto() {

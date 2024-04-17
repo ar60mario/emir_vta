@@ -8,9 +8,9 @@ package com.ventas.main;
 import com.ventas.entities.EquipoActivo;
 import com.ventas.estructura.Constante;
 import com.ventas.frame.AbmClientesFrame;
-import com.ventas.frame.AbmProductosFrame;
 import com.ventas.frame.AbmRubrosFrame;
 import com.ventas.frame.AbmSubRubroFrame;
+import com.ventas.frame.ProductosAbmFrame;
 import com.ventas.services.EquipoActivoService;
 import com.ventas.util.UtilFrame;
 import javax.swing.JFrame;
@@ -332,7 +332,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     private void abmProductos() {
-        AbmProductosFrame apf = new AbmProductosFrame();
+        ProductosAbmFrame apf = new ProductosAbmFrame();
         apf.setVisible(true);
         this.dispose();
     }
